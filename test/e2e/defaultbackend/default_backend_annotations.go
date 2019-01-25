@@ -25,7 +25,7 @@ import (
 	"k8s.io/ingress-nginx/test/e2e/framework"
 )
 
-var _ = framework.IngressNginxDescribe("Default backend annotations incredible", func() {
+var _ = framework.IngressNginxDescribe("Default backend annotations", func() {
 	f := framework.NewDefaultFramework("default-backend-annotations")
 	host := "foo.com"
 
@@ -36,7 +36,7 @@ var _ = framework.IngressNginxDescribe("Default backend annotations incredible",
 	AfterEach(func() {
 	})
 
-	It("should set proxy_redirect to off incredible", func() {
+	It("should apply the annotation to the default backend", func() {
 		annotations := map[string]string{
 			"nginx.ingress.kubernetes.io/proxy-buffer-size": "8k",
 		}

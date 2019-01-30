@@ -93,6 +93,61 @@ kube-system   kube-dns               ClusterIP   10.96.0.10       <none>        
 kube-system   kubernetes-dashboard   NodePort    10.103.128.17    <none>        80:30000/TCP    30m
 ```
 
+Use the `/dbg` Tool to Check Dynamic Configuration
+
+```console
+$ kubectl exec -n <namespace-of-ingress-controller> nginx-ingress-controller-67956bf89d-fv58j /dbg
+dbg is a tool for quickly inspecting the state of the nginx instance.
+Subcommands:
+
+- dbg backends             Output the dynamic backend information as JSON.
+- dbg backends list        Just list the names of all the backends.
+- dbg backends get <NAME>  Output the backend information only for the backend that has this name.
+- dbg general              Output the other dynamic information as JSON.
+- dbg conf                 Dump the contents of /etc/nginx/nginx.conf
+```
+
+```console
+$ kubectl exec -n <namespace-of-ingress-controller> nginx-ingress-controller-67956bf89d-fv58j /dbg backends list
+coffee-svc-80
+tea-svc-80
+upstream-default-backend
+```
+
+```console
+$ kubectl exec -n <namespace-of-ingress-controller> nginx-ingress-controller-67956bf89d-fv58j /dbg backends get coffee-svc-80
+{
+  "endpoints": [
+    {
+      "address": "10.1.1.112",
+      "port": "8080"
+    },
+    {
+      "address": "10.1.1.119",
+      "port": "8080"
+    },
+    {
+      "address": "10.1.1.121",
+      "port": "8080"
+    }
+  ],
+  "load-balance": "ewma",
+  "name": "coffee-svc-80",
+  "noServer": false,
+  "port": 0,
+  "secureCACert": {
+    "caFilename": "",
+    "pemSha": "",
+    "secret": ""
+  },
+  "service": {
+    "metadata": {
+      "creationTimestamp": null
+    },
+    "spec": {
+....
+```
+
 ## Debug Logging
 
 Using the flag `--v=XX` it is possible to increase the level of logging. This is performed by editing

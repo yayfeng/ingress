@@ -97,25 +97,34 @@ Use the `/dbg` Tool to Check Dynamic Configuration
 
 ```console
 $ kubectl exec -n <namespace-of-ingress-controller> nginx-ingress-controller-67956bf89d-fv58j /dbg
-dbg is a tool for quickly inspecting the state of the nginx instance.
-Subcommands:
+dbg is a tool for quickly inspecting the state of the nginx instance
 
-- dbg backends             Output the dynamic backend information as JSON.
-- dbg backends list        Just list the names of all the backends.
-- dbg backends get <NAME>  Output the backend information only for the backend that has this name.
-- dbg general              Output the other dynamic information as JSON.
-- dbg conf                 Dump the contents of /etc/nginx/nginx.conf
+Usage:
+  dbg [command]
+
+Available Commands:
+  backends      Output the dynamic backend information as a JSON array
+  conf          Dump the contents of /etc/nginx/nginx.conf
+  general       Output the general dynamic lua state
+  get-backend   Output the backend information only for the backend with a specified name
+  help          Help about any command
+  list-backends Output a newline-separated list of the backend names
+
+Flags:
+  -h, --help   help for dbg
+
+Use "dbg [command] --help" for more information about a command.
 ```
 
 ```console
-$ kubectl exec -n <namespace-of-ingress-controller> nginx-ingress-controller-67956bf89d-fv58j /dbg backends list
+$ kubectl exec -n <namespace-of-ingress-controller> nginx-ingress-controller-67956bf89d-fv58j /dbg list-backends
 coffee-svc-80
 tea-svc-80
 upstream-default-backend
 ```
 
 ```console
-$ kubectl exec -n <namespace-of-ingress-controller> nginx-ingress-controller-67956bf89d-fv58j /dbg backends get coffee-svc-80
+$ kubectl exec -n <namespace-of-ingress-controller> nginx-ingress-controller-67956bf89d-fv58j /dbg get-backend coffee-svc-80
 {
   "endpoints": [
     {

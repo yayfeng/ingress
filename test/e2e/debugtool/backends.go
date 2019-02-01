@@ -47,7 +47,7 @@ var _ = framework.IngressNginxDescribe("Debug Tool - backends", func() {
 			return Expect(cfg).Should(ContainSubstring(host))
 		})
 
-		cmd := "/dbg backends list"
+		cmd := "/dbg list-backends"
 		output, err := f.PodCommand(cmd)
 		Expect(err).Should(BeNil())
 
@@ -67,14 +67,14 @@ var _ = framework.IngressNginxDescribe("Debug Tool - backends", func() {
 			return Expect(cfg).Should(ContainSubstring(host))
 		})
 
-		cmd := "/dbg backends list"
+		cmd := "/dbg list-backends"
 		output, err := f.PodCommand(cmd)
 		Expect(err).Should(BeNil())
 
 		backends := strings.Split(string(output), "\n")
 		Expect(len(backends)).Should(BeNumerically(">", 0))
 
-		getCmd := "/dbg backends get " + backends[0]
+		getCmd := "/dbg get-backend " + backends[0]
 		output, err = f.PodCommand(getCmd)
 
 		var f map[string]interface{}

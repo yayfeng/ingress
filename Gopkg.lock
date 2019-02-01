@@ -145,6 +145,14 @@
   revision = "8306686428a5fe132eac8cb7c4848af725098bd4"
 
 [[projects]]
+  digest = "1:bde6b000abbce05d50e85e3f5326705ff7a11c9cfc1982112ff805fa64848dbb"
+  name = "github.com/gofortune/gofortune"
+  packages = ["lib"]
+  pruneopts = "NUT"
+  revision = "036ecbdf9de92598483a89db52f6f79e063f60b5"
+  version = "v0.0.1-snapshot"
+
+[[projects]]
   digest = "1:cd4f86461732066e277335465962660cbf02999e18d5bbb5e9285eac4608b970"
   name = "github.com/gogo/protobuf"
   packages = [
@@ -166,10 +174,11 @@
   revision = "c65c006176ff7ff98bb916961c7abbc6b0afc0aa"
 
 [[projects]]
-  digest = "1:479e958ad7ae540d7a3c565d1839cc7c8ab9b627640144443f1e88d11d4023d0"
+  digest = "1:381fdad8817f7dc3e36a62441e87b29251fcf216d93d39a244fda414ce9f1feb"
   name = "github.com/golang/protobuf"
   packages = [
     "proto",
+    "protoc-gen-go/descriptor",
     "ptypes",
     "ptypes/any",
     "ptypes/duration",
@@ -277,6 +286,14 @@
   version = "0.2.4"
 
 [[projects]]
+  digest = "1:406338ad39ab2e37b7f4452906442a3dbf0eb3379dd1f06aafb5c07e769a5fbb"
+  name = "github.com/inconshreveable/mousetrap"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
+  version = "v1.0"
+
+[[projects]]
   digest = "1:8e36686e8b139f8fe240c1d5cf3a145bc675c22ff8e707857cdd3ae17b00d728"
   name = "github.com/json-iterator/go"
   packages = ["."]
@@ -291,6 +308,14 @@
   pruneopts = "NUT"
   revision = "5c8c8bd35d3832f5d134ae1e1e375b69a4d25242"
   version = "v1.0.1"
+
+[[projects]]
+  digest = "1:11cb6df60c1e454d129213f48f1e232021beeceb0f5aefaef315e6b2c3c3fb1d"
+  name = "github.com/kubernetes/ingress-nginx"
+  packages = ["images/grpc-fortune-teller/proto/fortune"]
+  pruneopts = "NUT"
+  revision = "df61bd756505275baaa5fdc2a3dc4648e62dae95"
+  version = "nginx-0.15.0"
 
 [[projects]]
   branch = "master"
@@ -555,12 +580,28 @@
   version = "v1.1.2"
 
 [[projects]]
+  digest = "1:343d44e06621142ab09ae0c76c1799104cdfddd3ffb445d78b1adf8dc3ffaf3d"
+  name = "github.com/spf13/cobra"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "ef82de70bb3f60c65fb8eebacbb2d122ef517385"
+  version = "v0.0.3"
+
+[[projects]]
   digest = "1:9d8420bbf131d1618bde6530af37c3799340d3762cc47210c1d9532a4c3a2779"
   name = "github.com/spf13/pflag"
   packages = ["."]
   pruneopts = "NUT"
   revision = "298182f68c66c05229eb03ac171abe6e309ee79a"
   version = "v1.0.3"
+
+[[projects]]
+  digest = "1:74455a50d07a9e26d8090572a9192a1a6a2f9ca8f19400b3462cc11b579bcb9d"
+  name = "github.com/vromero/gofortune"
+  packages = ["lib/fortune"]
+  pruneopts = "NUT"
+  revision = "036ecbdf9de92598483a89db52f6f79e063f60b5"
+  version = "v0.0.1-snapshot"
 
 [[projects]]
   digest = "1:c10994a08ed2ff2cc7611d03ded8bb5f782096880b2daab391adbd9ab95a1764"
@@ -735,7 +776,7 @@
   revision = "31ac5d88444a9e7ad18077db9a165d793ad06a2e"
 
 [[projects]]
-  digest = "1:2f91d3e11b666570f8c923912f1cc8cf2f0c6b7371b2687ee67a8f73f08c6272"
+  digest = "1:d0b680e0e10bfbcbf2e3fed13f7e2ba52096518341a176cce93400e23f427b0d"
   name = "google.golang.org/grpc"
   packages = [
     ".",
@@ -758,6 +799,8 @@
     "metadata",
     "naming",
     "peer",
+    "reflection",
+    "reflection/grpc_reflection_v1alpha",
     "resolver",
     "resolver/dns",
     "resolver/passthrough",
@@ -1212,6 +1255,7 @@
     "github.com/eapache/channels",
     "github.com/imdario/mergo",
     "github.com/json-iterator/go",
+    "github.com/kubernetes/ingress-nginx/images/grpc-fortune-teller/proto/fortune",
     "github.com/kylelemons/godebug/pretty",
     "github.com/mitchellh/go-ps",
     "github.com/mitchellh/hashstructure",
@@ -1229,13 +1273,19 @@
     "github.com/prometheus/client_golang/prometheus/promhttp",
     "github.com/prometheus/client_model/go",
     "github.com/prometheus/common/expfmt",
+    "github.com/spf13/cobra",
     "github.com/spf13/pflag",
+    "github.com/vromero/gofortune/lib/fortune",
     "github.com/zakjan/cert-chain-resolver/certUtil",
+    "google.golang.org/grpc",
+    "google.golang.org/grpc/codes",
+    "google.golang.org/grpc/reflection",
     "gopkg.in/fsnotify/fsnotify.v1",
     "gopkg.in/go-playground/pool.v3",
     "k8s.io/api/apps/v1beta1",
     "k8s.io/api/core/v1",
     "k8s.io/api/extensions/v1beta1",
+    "k8s.io/api/rbac/v1",
     "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset",
     "k8s.io/apimachinery/pkg/api/errors",
     "k8s.io/apimachinery/pkg/apis/meta/v1",

@@ -214,6 +214,19 @@ func (f *Framework) NginxLogs() (string, error) {
 	return nginxLogs(f.KubeClientSet, f.IngressController.Namespace)
 }
 
+// PodCommand executes any command inside the nginx pod
+func (f *Framework) PodCommand(cmd string) (string, error) {
+	pod, err := getIngressNGINXPod(f.IngressController.Namespace, f.KubeClientSet)
+	if err != nil {
+		return "", err
+	}
+	o, err := f.ExecCommand(pod, cmd)
+	if err != nil {
+		return "", err
+	}
+	return o, nil
+}
+
 func (f *Framework) matchNginxConditions(name string, matcher func(cfg string) bool) wait.ConditionFunc {
 	return func() (bool, error) {
 		pod, err := getIngressNGINXPod(f.IngressController.Namespace, f.KubeClientSet)

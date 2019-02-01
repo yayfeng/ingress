@@ -42,7 +42,7 @@ var _ = framework.IngressNginxDescribe("Debug Tool - general", func() {
 		f.EnsureIngress(ing)
 
 		cmd := "/dbg general"
-		output, err := f.PodCommand(cmd)
+		output, err := f.ExecIngressPod(cmd)
 		Expect(err).Should(BeNil())
 
 		var f interface{}

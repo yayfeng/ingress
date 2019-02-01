@@ -48,7 +48,7 @@ var _ = framework.IngressNginxDescribe("Debug Tool - backends", func() {
 		})
 
 		cmd := "/dbg list-backends"
-		output, err := f.PodCommand(cmd)
+		output, err := f.ExecIngressPod(cmd)
 		Expect(err).Should(BeNil())
 
 		// Should be 2: the default and the echo deployment
@@ -68,14 +68,14 @@ var _ = framework.IngressNginxDescribe("Debug Tool - backends", func() {
 		})
 
 		cmd := "/dbg list-backends"
-		output, err := f.PodCommand(cmd)
+		output, err := f.ExecIngressPod(cmd)
 		Expect(err).Should(BeNil())
 
 		backends := strings.Split(string(output), "\n")
 		Expect(len(backends)).Should(BeNumerically(">", 0))
 
 		getCmd := "/dbg get-backend " + backends[0]
-		output, err = f.PodCommand(getCmd)
+		output, err = f.ExecIngressPod(getCmd)
 
 		var f map[string]interface{}
 		unmarshalErr := json.Unmarshal([]byte(output), &f)

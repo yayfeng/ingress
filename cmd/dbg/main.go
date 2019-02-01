@@ -28,60 +28,60 @@ import (
 
 func main() {
 	rootCmd := &cobra.Command{
-		Use: "dbg",
+		Use:   "dbg",
 		Short: "dbg is a tool for quickly inspecting the state of the nginx instance",
 	}
 
 	backendsCmd := &cobra.Command{
-		Use: "backends",
+		Use:   "backends",
 		Short: "Output the dynamic backend information as a JSON array",
-		Run: func(cmd *cobra.Command, args []string){
+		Run: func(cmd *cobra.Command, args []string) {
 			backends()
 		},
 	}
 	rootCmd.AddCommand(backendsCmd)
 
 	backendsListCmd := &cobra.Command{
-		Use: "list-backends",
+		Use:   "list-backends",
 		Short: "Output a newline-separated list of the backend names",
-		Run: func(cmd *cobra.Command, args []string){
+		Run: func(cmd *cobra.Command, args []string) {
 			backendsList()
 		},
 	}
 	rootCmd.AddCommand(backendsListCmd)
 
 	backendsGetCmd := &cobra.Command{
-		Use: "get-backend",
+		Use:   "get-backend",
 		Short: "Output the backend information only for the backend that has this name",
-		Args: cobra.ExactArgs(1),
-		Run: func(cmd *cobra.Command, args []string){
+		Args:  cobra.ExactArgs(1),
+		Run: func(cmd *cobra.Command, args []string) {
 			backendsGet(args[0])
 		},
 	}
 	rootCmd.AddCommand(backendsGetCmd)
 
 	generalCmd := &cobra.Command{
-		Use: "general",
+		Use:   "general",
 		Short: "Output the general dynamic lua state",
-		Run: func(cmd *cobra.Command, args []string){
+		Run: func(cmd *cobra.Command, args []string) {
 			general()
 		},
 	}
 	rootCmd.AddCommand(generalCmd)
 
 	confCmd := &cobra.Command{
-		Use: "conf",
+		Use:   "conf",
 		Short: "Dump the contents of /etc/nginx/nginx.conf",
-		Run: func(cmd *cobra.Command, args []string){
+		Run: func(cmd *cobra.Command, args []string) {
 			readNginxConf()
 		},
 	}
 	rootCmd.AddCommand(confCmd)
 
 	if err := rootCmd.Execute(); err != nil {
-	    fmt.Println(err)
-	    os.Exit(1)
-	 }
+		fmt.Println(err)
+		os.Exit(1)
+	}
 
 }
 
